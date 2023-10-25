@@ -4,9 +4,10 @@ require_once('lib/config.php');
 #nous voulons mettre une page en active avec php pr cela ns avons besoin de recup le index.php et recettes.php avec le server script name on recup cuisinea/index.php
 #qd nous sommes sur cette page la page doit devenir active 
 #nous allons utiliser basename pr ne recuperer que la fin du lien soit index.php sans le cuisinea/
-#echo basename($_SERVER['SCRIPT_NAME']);
+#echo basename($_SERVER['SCRIPT_NAME']) /le server ns indique la page courante/script name:nom du fichier actuel /basename ns retourne uniquement le nom du fichier;
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']);
+
 
 ?>
 
@@ -35,15 +36,12 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 nav nav-pills">
-        <li class="nav-item"><a href="index.php" class="nav-link <?php if ($currentPage === 'index.php') {
-                                                                    echo 'active';
-                                                                  } ?> ">Accueil</a></li>
-        <li class="nav-item"><a href="recettes.php" class="nav-link <?php if ($currentPage === 'recettes.php') {
-                                                                      echo 'active';
-                                                                    } ?> ">Nos recettes</a></li>
-        <li class="nav-item"><a href="#" class="nav-link ">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link ">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link ">About</a></li>
+        <?php foreach ($mainMenu as $key => $value) { ?>
+          <li class="nav-item"><a href="<?= $key; ?>" class="nav-link <?php if ($currentPage === $key) {
+                                                                        echo 'active';
+                                                                      } ?>"><?= $value; ?></a></li>
+
+        <?php } ?>
       </ul>
 
       <div class="col-md-3 text-end">

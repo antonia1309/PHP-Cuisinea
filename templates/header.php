@@ -1,5 +1,7 @@
 <?php
 require_once('lib/config.php');
+require_once('lib/pdo.php');
+
 #var_dump($_SERVER["SCRIPT_NAME"]);
 #nous voulons mettre une page en active avec php pr cela ns avons besoin de recup le index.php et recettes.php avec le server script name on recup cuisinea/index.php
 #qd nous sommes sur cette page la page doit devenir active 

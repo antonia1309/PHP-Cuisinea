@@ -2,12 +2,7 @@
 require_once('templates/header.php');
 require_once('lib/recipe.php');
 
-$sql = 'SELECT * FROM recipes ORDER BY id DESC';
-#cette requête va recup ttes les recettes et les mettre ds l orde la + recente(le +gros id) en 1er.
-
-$query = $pdo->prepare($sql);
-$query->execute();
-$recipes = $query->fetchAll();
+$recipes = getRecipes($pdo); #fonction qui recup ttes les recettes
 
 ?>
 

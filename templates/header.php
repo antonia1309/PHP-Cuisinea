@@ -1,6 +1,8 @@
 <?php
 require_once('lib/config.php');
 require_once('lib/pdo.php');
+require_once('lib/session.php');
+
 
 #var_dump($_SERVER["SCRIPT_NAME"]);
 #nous voulons mettre une page en active avec php pr cela ns avons besoin de recup le index.php et recettes.php avec le server script name on recup cuisinea/index.php
@@ -47,7 +49,11 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
       </ul>
 
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+        <?php if (!isset($_SESSION['user'])) { ?>
+          <a href="login.php" class="btn btn-outline-primary me-2">Se connecter</a>
+          <a href="inscription.php" class="btn btn-outline-primary me-2">S'inscrire</a>
+        <?php } else { ?>
+          <a href="logout.php" class="btn btn-primary">Se déconnecter</a>
+        <?php } ?>
       </div>
     </header>

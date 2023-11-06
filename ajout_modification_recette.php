@@ -1,5 +1,11 @@
 <?php
 require_once('templates/header.php');
+
+//si l utilisateur n est pas connecte on le redirige vers la page login.php
+if (!isset($_SESSION['user'])) {
+  header('location: login.php');
+}
+
 require_once('lib/recipe.php');
 require_once('lib/tools.php');
 require_once('lib/category.php');
@@ -65,15 +71,15 @@ if (isset($_POST['saveRecipe'])) {
 <h1>Ajouter une recette</h1>
 
 <?php foreach ($messages as $message) { ?>
-<div class="alert alert-success">
-  <?= $message; ?>
-</div>
+  <div class="alert alert-success">
+    <?= $message; ?>
+  </div>
 <?php } ?>
 
 <?php foreach ($errors as $error) { ?>
-<div class="alert alert-danger">
-  <?= $error; ?>
-</div>
+  <div class="alert alert-danger">
+    <?= $error; ?>
+  </div>
 <?php } ?>
 
 <form method="POST" enctype="multipart/form-data">
@@ -83,28 +89,25 @@ if (isset($_POST['saveRecipe'])) {
   </div>
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
-    <textarea name="description" id="description" cols="30" rows="5"
-      class="form-control"><?= $recipe['description']; ?></textarea>
+    <textarea name="description" id="description" cols="30" rows="5" class="form-control"><?= $recipe['description']; ?></textarea>
   </div>
   <div class="mb-3">
     <label for="ingredients" class="form-label">Ingrédients</label>
-    <textarea name="ingredients" id="ingredients" cols="30" rows="5"
-      class="form-control"><?= $recipe['ingredients']; ?></textarea>
+    <textarea name="ingredients" id="ingredients" cols="30" rows="5" class="form-control"><?= $recipe['ingredients']; ?></textarea>
   </div>
   <div class="mb-3">
     <label for="instructions" class="form-label">Instructions</label>
-    <textarea name="instructions" id="instructions" cols="30" rows="5"
-      class="form-control"><?= $recipe['instructions']; ?></textarea>
+    <textarea name="instructions" id="instructions" cols="30" rows="5" class="form-control"><?= $recipe['instructions']; ?></textarea>
   </div>
   <div class="mb-3">
     <label for="category" class="form-label">Catégorie</label>
     <select name="category" id="category" class="form-select">
 
       <?php foreach ($categories as $category) { ?>
-      <option value="<?= $category['id']; ?>" <?php if ($recipe['category_id'] == $category['id']) {
+        <option value="<?= $category['id']; ?>" <?php if ($recipe['category_id'] == $category['id']) {
                                                   echo 'selected="selected"';
                                                 } ?>><?= $category['name']; ?>
-      </option>
+        </option>
 
       <?php } ?>
 
